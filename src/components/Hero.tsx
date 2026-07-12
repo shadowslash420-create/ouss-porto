@@ -119,7 +119,7 @@ const Hero = () => {
         <div ref={ctaRef} className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Button onClick={scrollToContact} className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-primary text-primary-foreground rounded-lg font-medium hover:shadow-glow-primary transition-all duration-300 hover:scale-105" size="lg">
             <Handshake size={20} />
-            Hire Me
+            Inquire for a Project
           </Button>
 
           <Button onClick={scrollToProjects} variant="ghost" className="group inline-flex items-center gap-3 px-8 py-4 text-foreground hover:bg-primary/10 rounded-lg font-medium transition-all duration-300 hover:scale-105" size="lg">
