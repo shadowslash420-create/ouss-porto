@@ -23,11 +23,11 @@ const Projects = () => {
 
     {
       id: 2,
-      title: "3D Portfolio Website – Interactive & Animated",
-      description: "A visually engaging portfolio website featuring real-time 3D elements with Spline, fluid animations using GSAP, and a responsive UI built with React and Tailwind CSS.",
+      title: "Creperie Kinder 5 – Crepes & Desserts Shop",
+      description: "A vibrant business website for a crepe and dessert shop in Batna, showcasing a mouth-watering menu of crepes, waffles, and desserts with an inviting hero landing page and smooth navigation designed to drive online orders and foot traffic.",
       image: "/Images/project-2.jpg",
-      tech: ["React", "Spline", "GSAP", "Tailwind CSS", "Vercel"],
-      liveUrl: "",
+      tech: ["HTML", "CSS", "JavaScript"],
+      liveUrl: "https://creperiekinder-delta.vercel.app",
       githubUrl: ""
     },
     {
