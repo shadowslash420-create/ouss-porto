@@ -16,6 +16,7 @@ const Contact = () => {
     email: '',
     message: ''
   });
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -59,8 +60,9 @@ const Contact = () => {
     return () => ctx.revert();
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (status === 'sending') return;
 
     const button = e.currentTarget.querySelector('button[type="submit"]');
     if (button) {
@@ -73,9 +75,22 @@ const Contact = () => {
       });
     }
 
-    console.log('Form submitted:', formData);
+    setStatus('sending');
 
-    setFormData({ name: '', email: '', message: '' });
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) throw new Error('Request failed');
+
+      setStatus('success');
+      setFormData({ name: '', email: '', message: '' });
+    } catch (error) {
+      setStatus('error');
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -122,10 +137,17 @@ const Contact = () => {
                 <textarea id="message" name="message" value={formData.message} onChange={handleInputChange} required rows={6} className="w-full px-4 py-3 bg-input glass border border-border rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300 resize-none" placeholder="Tell me about your project..." />
               </div>
 
-              <button type="submit" className="group w-full inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-primary text-primary-foreground rounded-lg font-medium hover:shadow-glow-primary transition-all duration-300 hover:scale-105">
-                Send Message
+              <button type="submit" disabled={status === 'sending'} className="group w-full inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-primary text-primary-foreground rounded-lg font-medium hover:shadow-glow-primary transition-all duration-300 hover:scale-105 disabled:opacity-60 disabled:hover:scale-100">
+                {status === 'sending' ? 'Sending...' : 'Send Message'}
                 <PaperPlaneTilt size={20} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
               </button>
+
+              {status === 'success' && (
+                <p className="text-sm text-primary-glow text-center">Thanks! Your message has been sent — I'll get back to you soon.</p>
+              )}
+              {status === 'error' && (
+                <p className="text-sm text-destructive text-center">Something went wrong sending your message. Please try again or email oussamaanis2005@gmail.com directly.</p>
+              )}
             </form>
           </div>
 
