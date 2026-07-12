@@ -6,15 +6,10 @@ import SkillCard from './ui/SkillCard';
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface AboutProps {
-  ready?: boolean;
-}
-
-const About = ({ ready = false }: AboutProps) => {
+const About = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const skillsRef = useRef<HTMLDivElement>(null);
 
   const skills = [
     { icon: Globe, name: 'HTML5/CSS3', level: 95 },
@@ -32,8 +27,6 @@ const About = ({ ready = false }: AboutProps) => {
   ];
 
   useEffect(() => {
-    if (!ready) return;
-
     const ctx = gsap.context(() => {
       gsap.from(imageRef.current, {
         x: -100,
@@ -59,23 +52,10 @@ const About = ({ ready = false }: AboutProps) => {
           start: "top 80%"
         }
       });
-
-      gsap.from(skillsRef.current?.children || [], {
-        y: 30,
-        opacity: 0,
-        scale: 0.9,
-        duration: 0.6,
-        stagger: 0.1,
-        ease: "back.out(1.7)",
-        scrollTrigger: {
-          trigger: skillsRef.current,
-          start: "top 85%"
-        }
-      });
     }, sectionRef);
 
     return () => ctx.revert();
-  }, [ready]);
+  }, []);
 
   return (
     <section
@@ -108,7 +88,7 @@ const About = ({ ready = false }: AboutProps) => {
             </div>
 
             <p className="text-lg text-muted-foreground leading-relaxed">
-              I’m a Full-Stack Developer with 1 year of hands-on experience building fast, scalable, and responsive web applications using React.js, Node.js, Express, MongoDB, and PostgreSQL/MySQL. I specialize in creating secure RESTful APIs, implementing modern frontend interfaces, and managing full deployment pipelines using tools like Docker and Git.
+              I'm a Full-Stack Developer with 1 year of hands-on experience building fast, scalable, and responsive web applications using React.js, Node.js, Express, MongoDB, and PostgreSQL/MySQL. I specialize in creating secure RESTful APIs, implementing modern frontend interfaces, and managing full deployment pipelines using tools like Docker and Git.
             </p>
 
             <p className="text-lg text-muted-foreground leading-relaxed">
@@ -137,7 +117,7 @@ const About = ({ ready = false }: AboutProps) => {
             My <span className="text-primary-glow">Skills</span>
           </h3>
 
-          <div ref={skillsRef} className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {skills.map((skill) => (
               <SkillCard key={skill.name} icon={skill.icon} name={skill.name} level={skill.level} />
             ))}
