@@ -1,5 +1,6 @@
 {
   "buildCommand": "vite build",
+  "installCommand": "npm install --no-audit --no-fund --prefer-offline",
   "outputDirectory": "dist",
   "framework": "vite",
   "rewrites": [
