@@ -6,50 +6,50 @@
 
 @layer base {
   :root {
-    /* 60% — Deep Slate Midnight base (#0F172A → hsl 222 47% 11%) */
-    --background: 222 47% 7%;
-    --foreground: 210 30% 96%;
+    /* 60% — Soft off-white base (slate-50 #F8FAFC) */
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
 
-    /* 10% — Neon Cyan accent (#06B6D4 → hsl 189 94% 43%) */
-    --primary: 189 94% 43%;
-    --primary-foreground: 222 47% 7%;
-    --primary-glow: 189 94% 58%;
+    /* 10% — Cyan accent, darkened for light-bg contrast (#0891B2 cyan-600) */
+    --primary: 192 91% 36%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 192 91% 44%;
 
-    /* Electric Emerald secondary (#10B981 → hsl 160 84% 39%) */
-    --secondary: 160 84% 39%;
-    --secondary-foreground: 222 47% 7%;
-    --secondary-glow: 160 84% 52%;
+    /* Emerald secondary (#059669 emerald-600) */
+    --secondary: 161 94% 30%;
+    --secondary-foreground: 0 0% 100%;
+    --secondary-glow: 161 94% 38%;
 
-    /* Soft violet accent for variety */
-    --accent: 199 89% 55%;
-    --accent-foreground: 222 47% 7%;
-    --accent-glow: 199 89% 68%;
+    /* Sky accent */
+    --accent: 199 89% 42%;
+    --accent-foreground: 0 0% 100%;
+    --accent-glow: 199 89% 52%;
 
-    /* 30% — Slate structure (#94A3B8 → hsl 215 20% 65%) */
-    --muted: 222 47% 12%;
-    --muted-foreground: 215 20% 65%;
-    --border: 222 47% 16%;
-    --input: 222 47% 10%;
-    --ring: 189 94% 43%;
+    /* 30% — Slate muted text (#64748B slate-500) */
+    --muted: 214 32% 94%;
+    --muted-foreground: 215 16% 47%;
+    --border: 214 32% 88%;
+    --input: 214 32% 96%;
+    --ring: 192 91% 36%;
 
-    /* Cards: bg-slate-900/50 equivalent */
-    --card: 222 47% 9%;
-    --card-foreground: 210 30% 96%;
-    --glass: 222 47% 11%;
+    /* Cards: clean white with subtle depth */
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --glass: 0 0% 100%;
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 210 30% 96%;
+    --destructive: 0 84% 55%;
+    --destructive-foreground: 0 0% 100%;
 
-    --gradient-primary: linear-gradient(135deg, hsl(189 94% 43%), hsl(160 84% 39%));
-    --gradient-secondary: linear-gradient(135deg, hsl(160 84% 39%), hsl(189 94% 43%));
-    --gradient-background: linear-gradient(160deg, hsl(222 47% 7%), hsl(222 47% 10%), hsl(222 47% 7%));
-    --gradient-glass: linear-gradient(135deg, hsl(222 47% 14% / 0.6), hsl(222 47% 9% / 0.4));
+    --gradient-primary: linear-gradient(135deg, hsl(192 91% 36%), hsl(161 94% 30%));
+    --gradient-secondary: linear-gradient(135deg, hsl(161 94% 30%), hsl(192 91% 36%));
+    --gradient-background: linear-gradient(160deg, hsl(210 40% 98%), hsl(214 32% 95%), hsl(210 40% 98%));
+    --gradient-glass: linear-gradient(135deg, hsl(0 0% 100% / 0.9), hsl(214 32% 97% / 0.8));
 
-    --shadow-neon: 0 0 25px hsl(189 94% 43% / 0.45);
-    --shadow-cyan: 0 0 25px hsl(189 94% 43% / 0.45);
-    --shadow-glass: 0 8px 32px hsl(222 47% 4% / 0.5);
-    --glow-primary: 0 0 50px hsl(189 94% 43% / 0.5);
-    --glow-secondary: 0 0 50px hsl(160 84% 39% / 0.5);
+    --shadow-neon: 0 4px 20px hsl(192 91% 36% / 0.18);
+    --shadow-cyan: 0 4px 20px hsl(192 91% 36% / 0.18);
+    --shadow-glass: 0 2px 24px hsl(222 47% 11% / 0.07);
+    --glow-primary: 0 4px 32px hsl(192 91% 36% / 0.22);
+    --glow-secondary: 0 4px 32px hsl(161 94% 30% / 0.22);
     
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
@@ -75,11 +75,11 @@
   }
   
   .glass {
-    background: rgba(15, 23, 42, 0.5);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: var(--shadow-glass);
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
   }
   
   .glow-primary {
@@ -109,7 +109,7 @@
   }
   
   .text-glow {
-    text-shadow: 0 0 10px hsl(var(--primary) / 0.5);
+    text-shadow: 0 0 12px hsl(var(--primary) / 0.2);
   }
   
   ::-webkit-scrollbar {
