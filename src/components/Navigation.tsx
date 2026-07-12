@@ -78,7 +78,7 @@ const Navigation = () => {
 
   return (
     <>
-      <nav ref={navRef} className="fixed top-0 left-0 right-0 z-40 glass border-b border-slate-200/80">
+      <nav ref={navRef}className="fixed top-0 left-0 right-0 z-40 glass border-b border-white/10">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div ref={logoRef}>
@@ -107,7 +107,7 @@ const Navigation = () => {
       </nav>
 
       <div ref={mobileMenuRef}className="fixed top-0 right-0 w-full h-full bg-background/95 backdrop-blur-lg z-50 transform translate-x-full md:hidden">
-        <div className="flex items-center justify-between p-6 border-b border-slate-200/80">
+        <div className="flex items-center justify-between p-6 border-b border-white/10">
           <h2 className="text-2xl font-light text-primary-glow">Portfolio</h2>
           <button onClick={() => setIsOpen(false)} className="text-foreground p-2">
             <X size={24} />
