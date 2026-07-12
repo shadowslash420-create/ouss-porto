@@ -156,9 +156,9 @@ const Chatbot: React.FC = () => {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50">
       {isOpen && (
-        <div ref={chatboxRef} className="mb-4 w-80 h-96 glass-card overflow-hidden flex flex-col bg-black border-1 border-gray-200">
+        <div ref={chatboxRef} className="mb-4 w-[calc(100vw-3rem)] max-w-80 h-[70vh] max-h-96 glass-card overflow-hidden flex flex-col bg-black border border-gray-200">
           <div className="p-4 border-b border-glass-border ">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
