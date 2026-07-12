@@ -1,47 +1,45 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
-import { List, X, GithubLogo, InstagramLogo } from 'phosphor-react';
+import { GithubLogo, InstagramLogo } from 'phosphor-react';
+import BubbleMenu from './BubbleMenu';
 
-const Navigation = () => {
-  const [isOpen, setIsOpen] = useState(false);
+interface NavigationProps {
+  ready?: boolean;
+}
+
+const Navigation = ({ ready = true }: NavigationProps) => {
   const navRef = useRef<HTMLElement>(null);
   const leftRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLDivElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
-  const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const hasAnimatedRef = useRef(false);
 
   useEffect(() => {
+    // Fire the entrance animation once, right when the preloader actually
+    // hands off control — not on a hardcoded delay decoupled from it, which
+    // left the header invisible/stuck for a beat after content appeared.
+    if (!ready || hasAnimatedRef.current) return;
+    hasAnimatedRef.current = true;
+
+    gsap.set(navRef.current, { opacity: 1 });
     gsap.from(navRef.current, {
       y: -100,
       opacity: 0,
       duration: 1,
       ease: 'power3.out',
-      delay: 3.5,
     });
-    gsap.from([leftRef.current, logoRef.current, rightRef.current], {
+    gsap.from([leftRef.current, logoRef.current, rightRef.current].filter(Boolean), {
       y: -20,
       opacity: 0,
       duration: 0.7,
       stagger: 0.1,
       ease: 'power3.out',
-      delay: 3.8,
+      delay: 0.2,
     });
-  }, []);
-
-  useEffect(() => {
-    if (isOpen) {
-      gsap.to(mobileMenuRef.current, { x: 0, duration: 0.5, ease: 'power3.out' });
-      gsap.from(mobileMenuRef.current?.querySelectorAll('.menu-item') || [], {
-        x: 50, opacity: 0, duration: 0.4, stagger: 0.1, ease: 'power3.out', delay: 0.2,
-      });
-    } else {
-      gsap.to(mobileMenuRef.current, { x: '100%', duration: 0.5, ease: 'power3.out' });
-    }
-  }, [isOpen]);
+  }, [ready]);
 
   const scrollToSection = (sectionId: string) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
-    setIsOpen(false);
   };
 
   const navLinks = [
@@ -50,14 +48,26 @@ const Navigation = () => {
     { name: 'Contact', id: 'contact' },
   ];
 
+  const bubbleItems = [
+    { label: 'home', href: '#hero', ariaLabel: 'Home', rotation: -8, hoverStyles: { bgColor: '#4F46E5', textColor: '#ffffff' } },
+    { label: 'about', href: '#about', ariaLabel: 'About', rotation: 8, hoverStyles: { bgColor: '#6D28D9', textColor: '#ffffff' } },
+    { label: 'work', href: '#projects', ariaLabel: 'Work', rotation: -8, hoverStyles: { bgColor: '#2563EB', textColor: '#ffffff' } },
+    { label: 'contact', href: '#contact', ariaLabel: 'Contact', rotation: 8, hoverStyles: { bgColor: '#4F46E5', textColor: '#ffffff' } },
+  ];
+
   return (
     <>
-      <nav ref={navRef} className="fixed top-0 left-0 right-0 z-40 bg-background/80 backdrop-blur-xl border-b border-border/50">
+      {/* Desktop / tablet header */}
+      <nav
+        ref={navRef}
+        className="fixed top-0 left-0 right-0 z-40 bg-background/80 backdrop-blur-xl border-b border-border/50 hidden md:block"
+        style={{ opacity: 0 }}
+      >
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="grid grid-cols-3 items-center">
 
             {/* Left — nav links */}
-            <div ref={leftRef} className="hidden md:flex items-center gap-8">
+            <div ref={leftRef} className="flex items-center gap-8">
               {navLinks.map((item) => (
                 <button
                   key={item.id}
@@ -81,7 +91,7 @@ const Navigation = () => {
             </div>
 
             {/* Right — social icons */}
-            <div ref={rightRef} className="hidden md:flex items-center justify-end gap-5">
+            <div ref={rightRef} className="flex items-center justify-end gap-5">
               <a
                 href="https://github.com/shadowslash420-create"
                 target="_blank"
@@ -108,53 +118,23 @@ const Navigation = () => {
               </button>
             </div>
 
-            {/* Mobile hamburger */}
-            <div className="md:hidden flex justify-end col-span-2">
-              <button onClick={() => setIsOpen(!isOpen)} className="text-foreground p-2">
-                <List size={24} />
-              </button>
-            </div>
-
           </div>
         </div>
       </nav>
 
-      {/* Mobile drawer */}
-      <div ref={mobileMenuRef} className="fixed top-0 right-0 w-full h-full bg-background/95 backdrop-blur-lg z-50 transform translate-x-full md:hidden">
-        <div className="flex items-center justify-between p-6 border-b border-border/40">
-          <span className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">Oussama</span>
-          <button onClick={() => setIsOpen(false)} className="text-foreground p-2">
-            <X size={24} />
-          </button>
-        </div>
-
-        <div className="flex flex-col space-y-6 p-6 mt-8">
-          {navLinks.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => scrollToSection(item.id)}
-              className="menu-item text-left text-xl text-foreground/70 hover:text-primary transition-colors duration-300"
-            >
-              {item.name}
-            </button>
-          ))}
-
-          <div className="menu-item flex gap-4 pt-4">
-            <a href="https://github.com/shadowslash420-create" target="_blank" rel="noopener noreferrer" className="text-foreground/50 hover:text-primary transition-colors duration-200">
-              <GithubLogo size={24} />
-            </a>
-            <a href="https://www.instagram.com/oussama__zerafi/" target="_blank" rel="noopener noreferrer" className="text-foreground/50 hover:text-primary transition-colors duration-200">
-              <InstagramLogo size={24} />
-            </a>
-          </div>
-
-          <button
-            onClick={() => scrollToSection('contact')}
-            className="menu-item px-6 py-3 bg-gradient-primary text-white rounded-lg hover:shadow-glow-primary transition-all duration-300 text-center mt-4"
-          >
-            Hire Me
-          </button>
-        </div>
+      {/* Mobile header — BubbleMenu (React Bits) */}
+      <div className="md:hidden">
+        <BubbleMenu
+          logo={<span style={{ fontFamily: "'Dancing Script', cursive, sans-serif" }}>Oussama</span>}
+          items={bubbleItems}
+          menuAriaLabel="Toggle navigation"
+          menuBg="rgba(255,255,255,0.95)"
+          menuContentColor="#1e1b4b"
+          useFixedPosition
+          animationEase="back.out(1.5)"
+          animationDuration={0.5}
+          staggerDelay={0.12}
+        />
       </div>
     </>
   );

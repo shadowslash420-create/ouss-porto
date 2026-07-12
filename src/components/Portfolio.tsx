@@ -33,7 +33,7 @@ const Portfolio = () => {
       {isLoading && <Preloader onComplete={handleLoadingComplete} />}
       
       <div className={`transition-opacity duration-1000 ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
-        <Navigation />
+        <Navigation ready={!isLoading} />
         <main>
           <Hero />
           <About />
