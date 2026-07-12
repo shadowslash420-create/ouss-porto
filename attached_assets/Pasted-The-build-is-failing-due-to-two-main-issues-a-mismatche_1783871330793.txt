@@ -1,0 +1,53 @@
+The build is failing due to two main issues: a mismatched Node.js version engine configuration causing deployment conflicts, and an incomplete npm installation package that leaves Vite completely missing during the compilation stage (vite: command not found).
+
+Because you are deploying in 2026, Vercel is warning you that Node.js 20 is deprecated and expects Node.js 24.
+
+Here is the exact step-by-step fix to patch your repository so it deploys cleanly.
+
+The 2-Step Production Fix
+Step 1: Update your package.json
+Open the package.json file in the root directory of your project ouss-porto. You need to change the engine target to Node.js 24 and ensure Vite is properly listed under dependencies.
+
+Modify or add these specific sections:
+
+JSON
+{
+  "name": "ouss-porto",
+  "version": "1.0.0",
+  "engines": {
+    "node": "24.x"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    // Your existing production dependencies here
+  },
+  "devDependencies": {
+    "vite": "^5.0.0" 
+  }
+}
+Note: Ensure vite is present inside devDependencies or dependencies. The error command not found happens because Vercel's environment couldn't find the executable tool inside your project node modules.
+
+Step 2: Clear Vercel Cache & Redeploy
+Sometimes npm errors out completely if a remote lockfile breaks during the download.
+
+Go to your Vercel Dashboard.
+
+Select your project ouss-porto.
+
+Click on the Deployments tab.
+
+Click the three dots ... next to the failed deployment and select Redeploy.
+
+Crucial: Ensure you check the box that says "Redeploy with clean cache / ignore build cache".
+
+⚠️ A Note on Ignored Files
+Your log shows:
+
+Plaintext
+Removed 1 ignored files defined in .vercelignore
+   /server/index.js
+If your frontend portfolio code relies on this /server/index.js file to run your AI assistant or handle inquiries, it will not be uploaded to Vercel. If that server file is necessary for production, remove it from your .vercelignore file before pushing your next commit!
