@@ -43,7 +43,7 @@ const Portfolio = () => {
         <Navigation ready={!isLoading} />
         <main>
           <Hero />
-          <About />
+          <About ready={!isLoading} />
           <Projects />
           <Process />
           <Contact />

@@ -6,7 +6,11 @@ import SkillCard from './ui/SkillCard';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const About = () => {
+interface AboutProps {
+  ready?: boolean;
+}
+
+const About = ({ ready = false }: AboutProps) => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -28,6 +32,8 @@ const About = () => {
   ];
 
   useEffect(() => {
+    if (!ready) return;
+
     const ctx = gsap.context(() => {
       gsap.from(imageRef.current, {
         x: -100,
@@ -69,7 +75,7 @@ const About = () => {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [ready]);
 
   return (
     <section
