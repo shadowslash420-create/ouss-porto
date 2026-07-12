@@ -1,7 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Globe, Code, Lightning, Rocket, Heart, Database, GitBranch, Cube, Terminal, Cloud } from 'phosphor-react';
+import { Globe, Code, Lightning, Rocket, Heart, Database, GitBranch, Cube, Terminal } from 'phosphor-react';
+import SkillCard from './ui/SkillCard';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -131,22 +132,8 @@ const About = () => {
           </h3>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {skills.map((skill, index) => (
-              <div key={skill.name} className="glass p-6 cursor-pointer rounded-xl hover:shadow-glow-primary transition-all duration-300 hover:scale-105 group">
-                <div className="flex flex-col items-center text-center space-y-3">
-                  <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center group-hover:animate-bounce">
-                    <skill.icon size={24} className="text-primary-foreground" />
-                  </div>
-
-                  <h4 className="text-lg font-medium text-foreground">{skill.name}</h4>
-
-                  <div className="w-full bg-muted rounded-full h-2">
-                    <div className="bg-gradient-primary h-2 rounded-full transition-all duration-1000" style={{ width: `${skill.level}%` }} />
-                  </div>
-
-                  <span className="text-primary-glow font-medium">{skill.level}%</span>
-                </div>
-              </div>
+            {skills.map((skill) => (
+              <SkillCard key={skill.name} icon={skill.icon} name={skill.name} level={skill.level} />
             ))}
           </div>
         </div>
