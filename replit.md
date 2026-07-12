@@ -7,7 +7,7 @@ A personal portfolio site built with Vite, React, TypeScript, and shadcn/ui (Rad
 - Dev server: `npm run dev` — runs Vite (port 5000) and the local Express API (port 3001) together via `concurrently`. Vite proxies `/api/*` to the Express server (see `vite.config.ts`).
 - The "Start application" workflow runs this automatically.
 - Build: `npm run build` (or `npm run build:dev` for a development-mode build). Preview a build with `npm run preview`.
-- Node version: 18.x (matches the `engines` field in `package.json`).
+- Node version: 22.x (matches the `engines` field in `package.json`; supported on both Replit and Vercel).
 
 ## Project structure
 - `src/pages/Index.tsx` — main route, renders `Portfolio`.
@@ -21,6 +21,8 @@ A personal portfolio site built with Vite, React, TypeScript, and shadcn/ui (Rad
 - `vercel.json` sets the build command (`vite build`), output dir (`dist`), and an SPA rewrite so client-side routes fall back to `index.html` while `/api/*` still resolves to the serverless function.
 - Required environment variables in the Vercel project settings: `GMAIL_USER` and `GMAIL_APP_PASSWORD` (same Gmail App Password used in Replit). Without these, the contact form returns a 500 "Email service is not configured" error.
 - No other secrets are required; the chatbot is rule-based (no LLM API key needed).
+- Only one lockfile (`package-lock.json`) is committed so Vercel's package-manager auto-detection is unambiguous — don't add a second one (e.g. `bun.lockb`, `yarn.lock`) alongside it.
+- Production build passes `tsc --noEmit` and `eslint` with zero errors; `vite.config.ts` splits vendor code (`react-vendor`, `gsap`, `radix-ui`) into separate chunks to keep the main bundle lean.
 
 ## Mobile responsiveness
 - All sections use Tailwind responsive breakpoints (mobile-first, `sm`/`md`/`lg` variants) and were reviewed for narrow-viewport overflow, including the floating chatbot widget which now sizes itself to `calc(100vw - 3rem)` on small screens instead of a fixed width.

@@ -131,7 +131,7 @@ const About = () => {
             My <span className="text-primary-glow">Skills</span>
           </h3>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div ref={skillsRef} className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {skills.map((skill) => (
               <SkillCard key={skill.name} icon={skill.icon} name={skill.name} level={skill.level} />
             ))}

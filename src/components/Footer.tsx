@@ -74,10 +74,10 @@ const Footer = () => {
               Building modern, high-performance web experiences through elegant design, clean code, and the latest technologies.
             </p>
             <div className="flex gap-4">
-              <a href="" className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center hover:shadow-glow-primary transition-all duration-300 hover:scale-110">
+              <a href="https://github.com/shadowslash420-create" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center hover:shadow-glow-primary transition-all duration-300 hover:scale-110">
                 <GithubLogo size={18} className="text-primary-foreground" />
               </a>
-              <a href="" className="w-10 h-10 bg-gradient-secondary rounded-lg flex items-center justify-center hover:shadow-glow-secondary transition-all duration-300 hover:scale-110">
+              <a href="https://www.instagram.com/oussama__zerafi/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-gradient-secondary rounded-lg flex items-center justify-center hover:shadow-glow-secondary transition-all duration-300 hover:scale-110">
                 <LinkedinLogo size={18} className="text-secondary-foreground" />
               </a>
             </div>
