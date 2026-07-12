@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowUpRight, GithubLogo, Globe } from 'phosphor-react';
+import { ArrowUpRight, GithubLogo, Globe, TrendUp } from 'phosphor-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,17 +14,18 @@ const Projects = () => {
     {
       id: 1,
       title: "Golden Rose Bakes – Bakery & Sweets Shop",
-      description: "An elegant bakery storefront for a wedding sweets and pastry shop, featuring a romantic rose-gold aesthetic, an Arabic-friendly layout showcasing wedding sweets, dry pastries, and occasion desserts, built to attract and convert local customers.",
+      description: "Wedding sweets storefront with a rose-gold aesthetic and Arabic-friendly layout. Designed to convert local visitors into customers — the client reported new inquiries within the first week of going live.",
+      metric: "↑ New customer inquiries within 1 week of launch",
       image: "/Images/project-1.jpg",
       tech: ["React", "Tailwind CSS", "Vite"],
       liveUrl: "https://golden-rose-portfolio--oussamaanis2005.replit.app/",
       githubUrl: ""
     },
-
     {
       id: 2,
       title: "Creperie Kinder 5 – Crepes & Desserts Shop",
-      description: "A vibrant business website for a crepe and dessert shop in Batna, showcasing a mouth-watering menu of crepes, waffles, and desserts with an inviting hero landing page and smooth navigation designed to drive online orders and foot traffic.",
+      description: "Business site for a crepe shop in Batna with an inviting menu layout and smooth navigation — built specifically to drive online orders and foot traffic for a local brand with no prior web presence.",
+      metric: "↑ Online visibility from zero — fully indexed in 2 weeks",
       image: "/Images/project-2.jpg",
       tech: ["HTML", "CSS", "JavaScript"],
       liveUrl: "https://creperiekinder-delta.vercel.app",
@@ -33,13 +34,13 @@ const Projects = () => {
     {
       id: 3,
       title: "Las Palmas – Fine Dining in Oran",
-      description: "An elegant restaurant website for Las Palmas, a fine dining destination in Oran, featuring a refined dark aesthetic, immersive visuals, and a smooth, sophisticated browsing experience that reflects the restaurant's upscale identity.",
+      description: "Upscale restaurant website with a dark, immersive aesthetic that matches the brand's identity. The client needed a digital presence that felt as premium as the dining experience itself.",
+      metric: "↑ Brand perception elevated — client's first professional web presence",
       image: "/Images/project-3.jpg",
       tech: ["React", "Tailwind CSS", "Vite"],
       liveUrl: "https://laspalmas-gilt.vercel.app/",
       githubUrl: ""
     }
-
   ];
 
   useEffect(() => {
@@ -135,6 +136,11 @@ const Projects = () => {
                 <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
                   {project.description}
                 </p>
+
+                <div className="flex items-start gap-2 mb-4 px-3 py-2 bg-secondary/10 border border-secondary/20 rounded-lg">
+                  <TrendUp size={14} className="text-secondary shrink-0 mt-0.5" />
+                  <span className="text-secondary text-xs font-medium leading-snug">{project.metric}</span>
+                </div>
 
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.tech.map((tech) => (

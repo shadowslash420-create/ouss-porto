@@ -105,11 +105,12 @@ const Contact = () => {
       <div className="container mx-auto max-w-6xl">
         <div ref={titleRef} className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-light text-foreground mb-4">
-            Get In <span className="text-primary-glow">Touch</span>
+            Let's build something{' '}
+            <span className="text-primary-glow">exceptional</span> together.
           </h2>
           <div className="w-20 h-1 bg-gradient-primary rounded-full mx-auto mb-6" />
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Have a project in mind or just want to say hello? Drop me a message and let's create something amazing together.
+            Ready to launch your next project? Drop me a message and I'll get back to you within 24 hours.
           </p>
         </div>
 

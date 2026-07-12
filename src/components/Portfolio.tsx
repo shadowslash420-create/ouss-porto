@@ -2,8 +2,10 @@ import { useState, useEffect } from 'react';
 import Preloader from './Preloader';
 import Navigation from './Navigation';
 import Hero from './Hero';
+import SocialProof from './SocialProof';
 import About from './About';
 import Projects from './Projects';
+import Process from './Process';
 import Contact from './Contact';
 import Footer from './Footer';
 import Chatbot from './Chatbot';
@@ -35,8 +37,10 @@ const Portfolio = () => {
         <Navigation />
         <main>
           <Hero />
+          <SocialProof />
           <About />
           <Projects />
+          <Process />
           <Contact />
           <Chatbot/>
         </main>
