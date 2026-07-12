@@ -32,11 +32,11 @@ const Projects = () => {
     },
     {
       id: 3,
-      title: "3D Website Landing Page",
-      description: "A modern 3D landing page built with Spline, HTML, and CSS, featuring smooth animations, interactive visuals, and a responsive, elegant layout for an engaging and immersive user experience across all devices.",
+      title: "Las Palmas – Fine Dining in Oran",
+      description: "An elegant restaurant website for Las Palmas, a fine dining destination in Oran, featuring a refined dark aesthetic, immersive visuals, and a smooth, sophisticated browsing experience that reflects the restaurant's upscale identity.",
       image: "/Images/project-3.jpg",
-      tech: ["HTML", "CSS", "Spline"],
-      liveUrl: "",
+      tech: ["React", "Tailwind CSS", "Vite"],
+      liveUrl: "https://laspalmas-gilt.vercel.app/",
       githubUrl: ""
     }
 
