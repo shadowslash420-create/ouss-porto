@@ -62,10 +62,10 @@ const Process = () => {
     <section
       id="process"
       ref={sectionRef}
-      className="py-20 px-6 relative overflow-hidden"
+      className="pt-10 pb-20 px-6 relative overflow-hidden"
     >
       <div className="container mx-auto max-w-5xl">
-        <div ref={titleRef} className="text-center mb-16">
+        <div ref={titleRef} className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-light text-foreground mb-4">
             How I <span className="text-primary-glow">Work</span>
           </h2>

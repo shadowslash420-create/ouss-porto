@@ -8,6 +8,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogDescription,
   DialogFooter,
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
@@ -78,7 +79,7 @@ const Projects = () => {
   }, []);
 
   return (
-    <section id="projects" ref={sectionRef} className="py-20 relative overflow-hidden">
+    <section id="projects" ref={sectionRef} className="pt-20 pb-10 relative overflow-hidden">
       {/* Section title */}
       <div ref={titleRef} className="text-center mb-4 px-6">
         <h2 className="text-4xl md:text-5xl font-light text-foreground mb-4">
@@ -106,7 +107,7 @@ const Projects = () => {
       </div>
 
       {/* Project detail cards below gallery */}
-      <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-3 gap-6 px-6 max-w-7xl mx-auto mt-10">
+      <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-3 gap-6 px-6 max-w-7xl mx-auto mt-4">
         {projects.map((project) => (
           <div
             key={project.id}
@@ -156,6 +157,9 @@ const Projects = () => {
             <>
               <DialogHeader>
                 <DialogTitle className="text-xl">{selectedProject.title}</DialogTitle>
+                <DialogDescription className="sr-only">
+                  Project details for {selectedProject.title}
+                </DialogDescription>
               </DialogHeader>
 
               <img
