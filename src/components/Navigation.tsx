@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
-import { List, X, GithubLogo, LinkedinLogo } from 'phosphor-react';
+import { List, X, GithubLogo, InstagramLogo } from 'phosphor-react';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -83,7 +83,7 @@ const Navigation = () => {
             {/* Right — social icons */}
             <div ref={rightRef} className="hidden md:flex items-center justify-end gap-5">
               <a
-                href="https://github.com"
+                href="https://github.com/shadowslash420-create"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-foreground/50 hover:text-primary transition-colors duration-200"
@@ -92,13 +92,13 @@ const Navigation = () => {
                 <GithubLogo size={20} />
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://www.instagram.com/oussama__zerafi/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-foreground/50 hover:text-primary transition-colors duration-200"
-                aria-label="LinkedIn"
+                aria-label="Instagram"
               >
-                <LinkedinLogo size={20} />
+                <InstagramLogo size={20} />
               </a>
               <button
                 onClick={() => scrollToSection('contact')}
@@ -140,11 +140,11 @@ const Navigation = () => {
           ))}
 
           <div className="menu-item flex gap-4 pt-4">
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-foreground/50 hover:text-primary transition-colors duration-200">
+            <a href="https://github.com/shadowslash420-create" target="_blank" rel="noopener noreferrer" className="text-foreground/50 hover:text-primary transition-colors duration-200">
               <GithubLogo size={24} />
             </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-foreground/50 hover:text-primary transition-colors duration-200">
-              <LinkedinLogo size={24} />
+            <a href="https://www.instagram.com/oussama__zerafi/" target="_blank" rel="noopener noreferrer" className="text-foreground/50 hover:text-primary transition-colors duration-200">
+              <InstagramLogo size={24} />
             </a>
           </div>
 
