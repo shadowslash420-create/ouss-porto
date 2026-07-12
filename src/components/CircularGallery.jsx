@@ -264,14 +264,27 @@ class App {
     const distance = (this.start - x) * (this.scrollSpeed * 0.025);
     this.scroll.target = this.scroll.position + distance;
   }
-  onTouchUp() {
+  onTouchUp(e) {
     this.isDown = false;
     this.onCheck();
-    if (!this.hasDragged && this.startedInGallery && this.onItemClick && this.itemsLength && this.medias && this.medias[0]) {
-      const width = this.medias[0].width;
-      const itemIndex = Math.round(Math.abs(this.scroll.target) / width);
-      const originalIndex = ((itemIndex % this.itemsLength) + this.itemsLength) % this.itemsLength;
-      this.onItemClick(originalIndex);
+    if (!this.hasDragged && this.startedInGallery && this.onItemClick && this.itemsLength && this.medias && this.medias.length) {
+      const clientX = e && (e.changedTouches ? e.changedTouches[0].clientX : e.clientX);
+      if (typeof clientX === 'number' && this.container) {
+        const rect = this.container.getBoundingClientRect();
+        const pixelX = clientX - rect.left - this.screen.width / 2;
+        const worldX = pixelX * (this.viewport.width / this.screen.width);
+        let closest = null;
+        let closestDist = Infinity;
+        this.medias.forEach((m) => {
+          const dist = Math.abs(m.plane.position.x - worldX);
+          if (dist < closestDist) { closestDist = dist; closest = m; }
+        });
+        // Only count it as a hit if the click actually landed within that item's surface
+        if (closest && closestDist <= closest.plane.scale.x / 2) {
+          const originalIndex = ((closest.index % this.itemsLength) + this.itemsLength) % this.itemsLength;
+          this.onItemClick(originalIndex);
+        }
+      }
     }
     this.startedInGallery = false;
   }
