@@ -15,6 +15,7 @@
   "engines": {
     "node": "24.x"
   },
+  "packageManager": "pnpm@10.26.1",
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-accordion": "^1.2.0",
