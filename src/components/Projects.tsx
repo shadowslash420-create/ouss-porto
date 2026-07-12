@@ -1,8 +1,16 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowUpRight, Globe, TrendUp } from 'phosphor-react';
 import CircularGallery from './CircularGallery';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -45,6 +53,7 @@ const Projects = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
+  const [selectedProject, setSelectedProject] = useState<(typeof projects)[number] | null>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -92,17 +101,24 @@ const Projects = () => {
           scrollEase={0.03}
           font="bold 26px Inter"
           fontUrl="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap"
+          onItemClick={(index: number) => setSelectedProject(projects[index])}
         />
       </div>
 
       {/* Project detail cards below gallery */}
       <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-3 gap-6 px-6 max-w-7xl mx-auto mt-10">
         {projects.map((project) => (
-          <a
+          <div
             key={project.id}
-            href={project.liveUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+            role="button"
+            tabIndex={0}
+            onClick={() => setSelectedProject(project)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                setSelectedProject(project);
+              }
+            }}
             className="group glass rounded-xl p-6 flex flex-col gap-3 hover:shadow-neon transition-all duration-300 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             <h3 className="text-lg font-semibold text-foreground">{project.title}</h3>
@@ -123,15 +139,61 @@ const Projects = () => {
 
             <span className="inline-flex items-center gap-1.5 text-sm text-primary font-medium group-hover:gap-2.5 transition-all duration-200 mt-1">
               <Globe size={14} />
-              View Live Site
+              View Details
               <ArrowUpRight size={14} />
             </span>
-          </a>
+          </div>
         ))}
       </div>
 
       <div className="absolute top-1/4 left-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl -translate-x-1/2 pointer-events-none" />
       <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl translate-x-1/2 pointer-events-none" />
+
+      {/* Project details popup */}
+      <Dialog open={!!selectedProject} onOpenChange={(open) => !open && setSelectedProject(null)}>
+        <DialogContent className="sm:max-w-lg">
+          {selectedProject && (
+            <>
+              <DialogHeader>
+                <DialogTitle className="text-xl">{selectedProject.title}</DialogTitle>
+              </DialogHeader>
+
+              <img
+                src={selectedProject.image}
+                alt={selectedProject.title}
+                className="w-full h-48 object-cover rounded-lg"
+              />
+
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                {selectedProject.description}
+              </p>
+
+              <div className="flex items-start gap-2 px-3 py-2 bg-secondary/8 border border-secondary/15 rounded-lg">
+                <TrendUp size={13} className="text-primary shrink-0 mt-0.5" />
+                <span className="text-primary text-xs font-medium leading-snug">{selectedProject.metric}</span>
+              </div>
+
+              <div className="flex flex-wrap gap-2">
+                {selectedProject.tech.map((t) => (
+                  <span key={t} className="px-2.5 py-1 bg-primary/8 text-primary text-xs rounded-full border border-primary/15 font-medium">
+                    {t}
+                  </span>
+                ))}
+              </div>
+
+              <DialogFooter>
+                <Button asChild className="w-full sm:w-auto">
+                  <a href={selectedProject.liveUrl} target="_blank" rel="noopener noreferrer">
+                    <Globe size={14} className="mr-1.5" />
+                    Visit Live Site
+                    <ArrowUpRight size={14} className="ml-1.5" />
+                  </a>
+                </Button>
+              </DialogFooter>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </section>
   );
 };

@@ -218,12 +218,16 @@ class Media {
 }
 
 class App {
-  constructor(container, { items, bend, textColor = '#ffffff', borderRadius = 0, font = DEFAULT_FONT, scrollSpeed = 2, scrollEase = 0.05 } = {}) {
+  constructor(container, { items, bend, textColor = '#ffffff', borderRadius = 0, font = DEFAULT_FONT, scrollSpeed = 2, scrollEase = 0.05, onItemClick } = {}) {
     document.documentElement.classList.remove('no-js');
     this.container = container;
     this.scrollSpeed = scrollSpeed;
     this.scroll = { ease: scrollEase, current: 0, target: 0, last: 0 };
     this.onCheckDebounce = debounce(this.onCheck.bind(this), 200);
+    this.onItemClick = onItemClick;
+    this.itemsLength = (items && items.length) || 0;
+    this.hasDragged = false;
+    this.startedInGallery = false;
     this.createRenderer(); this.createCamera(); this.createScene();
     this.onResize();
     this.createGeometry();
@@ -246,9 +250,31 @@ class App {
       new Media({ geometry: this.planeGeometry, gl: this.gl, image: data.image, index, length: this.mediasImages.length, renderer: this.renderer, scene: this.scene, screen: this.screen, text: data.text, viewport: this.viewport, bend, textColor, borderRadius, font })
     );
   }
-  onTouchDown(e) { this.isDown = true; this.scroll.position = this.scroll.current; this.start = e.touches ? e.touches[0].clientX : e.clientX; }
-  onTouchMove(e) { if (!this.isDown) return; const x = e.touches ? e.touches[0].clientX : e.clientX; const distance = (this.start - x) * (this.scrollSpeed * 0.025); this.scroll.target = this.scroll.position + distance; }
-  onTouchUp() { this.isDown = false; this.onCheck(); }
+  onTouchDown(e) {
+    this.isDown = true;
+    this.hasDragged = false;
+    this.startedInGallery = !!(this.container && e.target && this.container.contains(e.target));
+    this.scroll.position = this.scroll.current;
+    this.start = e.touches ? e.touches[0].clientX : e.clientX;
+  }
+  onTouchMove(e) {
+    if (!this.isDown) return;
+    const x = e.touches ? e.touches[0].clientX : e.clientX;
+    if (Math.abs(this.start - x) > 5) this.hasDragged = true;
+    const distance = (this.start - x) * (this.scrollSpeed * 0.025);
+    this.scroll.target = this.scroll.position + distance;
+  }
+  onTouchUp() {
+    this.isDown = false;
+    this.onCheck();
+    if (!this.hasDragged && this.startedInGallery && this.onItemClick && this.itemsLength && this.medias && this.medias[0]) {
+      const width = this.medias[0].width;
+      const itemIndex = Math.round(Math.abs(this.scroll.target) / width);
+      const originalIndex = ((itemIndex % this.itemsLength) + this.itemsLength) % this.itemsLength;
+      this.onItemClick(originalIndex);
+    }
+    this.startedInGallery = false;
+  }
   onWheel(e) { const delta = e.deltaY || e.wheelDelta || e.detail; this.scroll.target += (delta > 0 ? this.scrollSpeed : -this.scrollSpeed) * 0.2; this.onCheckDebounce(); }
   onKeyDown(e) {
     if (e.key === 'ArrowRight') { e.preventDefault(); this.scroll.target += this.scrollSpeed * 5; this.onCheckDebounce(); }
@@ -323,7 +349,7 @@ function canUseWebGL() {
   }
 }
 
-export default function CircularGallery({ items, bend = 3, textColor = '#ffffff', borderRadius = 0.05, font = DEFAULT_FONT, fontUrl, scrollSpeed = 2, scrollEase = 0.05 }) {
+export default function CircularGallery({ items, bend = 3, textColor = '#ffffff', borderRadius = 0.05, font = DEFAULT_FONT, fontUrl, scrollSpeed = 2, scrollEase = 0.05, onItemClick }) {
   const containerRef = useRef(null);
   const fallbackRef = useRef(null);
 
@@ -335,13 +361,13 @@ export default function CircularGallery({ items, bend = 3, textColor = '#ffffff'
     resolveFont(font, fontUrl).then(resolvedFont => {
       if (!isMounted || !containerRef.current) return;
       try {
-        app = new App(containerRef.current, { items, bend, textColor, borderRadius, font: resolvedFont, scrollSpeed, scrollEase });
+        app = new App(containerRef.current, { items, bend, textColor, borderRadius, font: resolvedFont, scrollSpeed, scrollEase, onItemClick });
       } catch (e) {
         console.warn('CircularGallery: WebGL init failed, showing fallback.', e);
       }
     });
     return () => { isMounted = false; if (app) app.destroy(); };
-  }, [items, bend, textColor, borderRadius, font, fontUrl, scrollSpeed, scrollEase]);
+  }, [items, bend, textColor, borderRadius, font, fontUrl, scrollSpeed, scrollEase, onItemClick]);
 
   // CSS fallback for non-WebGL environments
   if (typeof window !== 'undefined' && !canUseWebGL()) {
@@ -352,7 +378,19 @@ export default function CircularGallery({ items, bend = 3, textColor = '#ffffff'
         style={{ width: '100%', height: '100%', overflowX: 'auto', display: 'flex', alignItems: 'center', gap: '24px', padding: '0 40px', cursor: 'grab' }}
       >
         {(items || []).map((item, i) => (
-          <div key={i} style={{ flexShrink: 0, width: 320, borderRadius: 16, overflow: 'hidden', boxShadow: '0 8px 32px rgba(79,70,229,0.12)' }}>
+          <div
+            key={i}
+            role={onItemClick ? 'button' : undefined}
+            tabIndex={onItemClick ? 0 : undefined}
+            onClick={() => onItemClick && onItemClick(i)}
+            onKeyDown={(e) => {
+              if (onItemClick && (e.key === 'Enter' || e.key === ' ')) {
+                e.preventDefault();
+                onItemClick(i);
+              }
+            }}
+            style={{ flexShrink: 0, width: 320, borderRadius: 16, overflow: 'hidden', boxShadow: '0 8px 32px rgba(79,70,229,0.12)', cursor: onItemClick ? 'pointer' : 'default' }}
+          >
             <img src={item.image} alt={item.text} style={{ width: '100%', height: 220, objectFit: 'cover', display: 'block' }} />
             <div style={{ padding: '12px 16px', fontWeight: 700, fontSize: 16, color: textColor }}>{item.text}</div>
           </div>
