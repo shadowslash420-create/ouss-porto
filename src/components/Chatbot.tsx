@@ -48,11 +48,82 @@ const Chatbot: React.FC = () => {
     }
   };
 
-  const handleSendMessage = async () => {
+  const getBotResponse = (input: string): string => {
+    const text = input.toLowerCase();
+
+    const includesAny = (keywords: string[]) => keywords.some((k) => text.includes(k));
+
+    if (includesAny(['price', 'pricing', 'cost', 'budget', 'how much', 'rate', 'quote'])) {
+      return "Pricing depends on the size and features of your project — a simple one-page portfolio costs less than a full app with a backend, database, or admin dashboard. Send me a quick description of what you need at oussamaanis2005@gmail.com or +213 797086530, and I'll get you a fair quote based on scope, features, and functions required.";
+    }
+
+    if (includesAny(['how long', 'timeline', 'duration', 'time', 'deadline', 'delivery', 'turnaround'])) {
+      return "Timelines depend on the app's size and features. A simple portfolio site usually takes about 1 week. More complex apps with backend logic, databases, or custom integrations take longer — I'll give you an exact estimate once I know the scope.";
+    }
+
+    if (includesAny(['process', 'workflow', 'how do you work', 'steps', 'how it works'])) {
+      return "The process is simple: 1) You share your requirements and goals, 2) I send a proposal with timeline and pricing, 3) I build in stages and share progress, 4) You review and request revisions, 5) I deploy and hand off the finished project. A portfolio-style site typically takes about 1 week end-to-end.";
+    }
+
+    if (includesAny(['payment', 'pay', 'deposit', 'invoice'])) {
+      return "Payment is usually split — a deposit upfront to start the project, and the remainder on delivery. Exact terms depend on project size and can be discussed directly at oussamaanis2005@gmail.com.";
+    }
+
+    if (includesAny(['revision', 'change', 'edit request', 'update after'])) {
+      return "A reasonable number of revisions are included after delivery to make sure you're happy with the result. Larger scope changes beyond the original request are quoted separately.";
+    }
+
+    if (includesAny(['maintenance', 'support', 'bug fix', 'after launch', 'ongoing'])) {
+      return "I offer post-launch support and maintenance — bug fixes, small updates, and ongoing improvements — available as a one-off or a monthly arrangement depending on your needs.";
+    }
+
+    if (includesAny(['hosting', 'deploy', 'domain', 'server'])) {
+      return "I can handle deployment and hosting setup for you (e.g. Vercel, Netlify, VPS, or Replit), and help connect a custom domain. Hosting costs (if any) are separate from development costs and depend on the platform you choose.";
+    }
+
+    if (includesAny(['seo'])) {
+      return "Yes, I build with SEO fundamentals in mind — semantic HTML, fast load times, meta tags, and responsive design — so your site is discoverable and performs well in search results.";
+    }
+
+    if (includesAny(['nda', 'confidential', 'contract'])) {
+      return "I'm happy to sign an NDA or contract before discussing sensitive project details — just send it over to oussamaanis2005@gmail.com.";
+    }
+
+    if (includesAny(['available', 'availability', 'when can you', 'free to talk', 'hours', 'schedule'])) {
+      return "I'm available daily from 8 AM to 4 PM (Batna, Algeria time). Feel free to reach out by email or phone during those hours, or leave a message and I'll get back to you.";
+    }
+
+    if (includesAny(['service', 'what do you do', 'what can you build', 'offer'])) {
+      return "I build full-stack web applications — from responsive portfolio and business sites to complex apps with React, Node.js, Express, MongoDB/PostgreSQL, RESTful APIs, and interactive animations with GSAP/WebGL.";
+    }
+
+    if (includesAny(['contact', 'email', 'phone', 'reach', 'call', 'whatsapp'])) {
+      return "You can reach Oussama directly at oussamaanis2005@gmail.com or +213 797086530 (0797086530). He's based in Batna, Algeria and available 8 AM–4 PM.";
+    }
+
+    if (includesAny(['react', 'node', 'express', 'mongodb', 'postgres', 'mysql', 'docker', 'git', 'stack', 'technology', 'tech'])) {
+      return "The tech stack includes React, Node.js, Express, MongoDB and PostgreSQL/MySQL, RESTful APIs, Docker, Git, and animation tools like GSAP and WebGL for interactive, high-performance interfaces.";
+    }
+
+    if (includesAny(['project', 'portfolio', 'work', 'experience'])) {
+      return "Oussama is a Full-Stack Developer with hands-on experience building React/Node.js applications, RESTful APIs, and animated interfaces. Check out the Projects section above, or ask me about pricing, timeline, or the tech stack.";
+    }
+
+    if (includesAny(['hi', 'hello', 'hey', 'good morning', 'good afternoon'])) {
+      return "Hey there! I'm Oussama's AI assistant. Ask me about pricing, timelines, the process, tech stack, or availability — happy to help.";
+    }
+
+    if (includesAny(['thank', 'thanks'])) {
+      return "You're welcome! Let me know if you have any other questions.";
+    }
+
+    return "That's a great question — for exact details I'd recommend reaching out directly to Oussama at oussamaanis2005@gmail.com or +213 797086530 (available 8 AM–4 PM, Batna, Algeria). In the meantime, feel free to ask me about pricing, timelines, the process, tech stack, or availability.";
+  };
+
+  const handleSendMessage = () => {
     if (!message.trim() || isTyping) return;
 
     const trimmed = message.trim();
-    const historyForRequest = messages.map(({ text, isBot }) => ({ text, isBot }));
 
     const newUserMessage = {
       id: messages.length + 1,
@@ -65,32 +136,16 @@ const Chatbot: React.FC = () => {
     setMessage('');
     setIsTyping(true);
 
-    try {
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: trimmed, history: historyForRequest }),
-      });
-
-      const data = await response.json();
-      const reply = data.reply || "Sorry, I couldn't come up with a response. Could you rephrase that?";
-
+    setTimeout(() => {
+      const reply = getBotResponse(trimmed);
       setMessages(prev => [...prev, {
         id: prev.length + 1,
         text: reply,
         isBot: true,
         timestamp: new Date()
       }]);
-    } catch (error) {
-      setMessages(prev => [...prev, {
-        id: prev.length + 1,
-        text: "Sorry, I'm having trouble connecting right now. Please try again or email oussamaanis2005@gmail.com.",
-        isBot: true,
-        timestamp: new Date()
-      }]);
-    } finally {
       setIsTyping(false);
-    }
+    }, 500 + Math.random() * 400);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {

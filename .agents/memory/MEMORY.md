@@ -1,0 +1,1 @@
+- [Gemini free-tier quota account-wide](gemini-quota-account-wide.md) — repeated "limit: 0" 429s across 3 different Gemini keys means it's an account/billing restriction, not a bad key.
