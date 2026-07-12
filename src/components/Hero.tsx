@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
-import { ArrowRight, DownloadSimple, Handshake } from 'phosphor-react';
+import { ArrowRight, Handshake } from 'phosphor-react';
 import { Button } from './ui/button';
 
 const Hero = () => {
@@ -91,15 +91,6 @@ const Hero = () => {
     }
   };
 
-  const downloadCV = () => {
-    const link = document.createElement('a');
-    link.href = '/Images/Oussama-Resume.pdf';
-    link.download = 'Oussama-Resume.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
   return (
     <section id="hero" ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div ref={splineRef} className="absolute inset-0 w-full h-full opacity-70">
@@ -129,11 +120,6 @@ const Hero = () => {
           <Button onClick={scrollToContact} className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-primary text-primary-foreground rounded-lg font-medium hover:shadow-glow-primary transition-all duration-300 hover:scale-105" size="lg">
             <Handshake size={20} />
             Hire Me
-          </Button>
-
-          <Button onClick={downloadCV} variant="outline" className="group inline-flex items-center gap-3 px-8 py-4 border-primary/30 text-primary hover:bg-primary/10 rounded-lg font-medium transition-all duration-300 hover:scale-105" size="lg">
-            <DownloadSimple size={20} />
-            Download CV
           </Button>
 
           <Button onClick={scrollToProjects} variant="ghost" className="group inline-flex items-center gap-3 px-8 py-4 text-foreground hover:bg-primary/10 rounded-lg font-medium transition-all duration-300 hover:scale-105" size="lg">
