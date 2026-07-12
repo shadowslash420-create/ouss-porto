@@ -8,7 +8,6 @@ const Hero = () => {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
-  const splineRef = useRef<HTMLDivElement>(null);
   const orbRef1 = useRef<HTMLDivElement>(null);
   const orbRef2 = useRef<HTMLDivElement>(null);
   const orbRef3 = useRef<HTMLDivElement>(null);
@@ -35,13 +34,7 @@ const Hero = () => {
         scale: 0.9,
         duration: 0.8,
         ease: "back.out(1.7)"
-      }, "-=0.3")
-      .from(splineRef.current, {
-        x: 100,
-        opacity: 0,
-        duration: 1.2,
-        ease: "power3.out"
-      }, "-=1");
+      }, "-=0.3");
 
     gsap.to(orbRef1.current, {
       y: -20,
@@ -93,13 +86,10 @@ const Hero = () => {
 
   return (
     <section id="hero" ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div ref={splineRef} className="absolute inset-0 w-full h-full opacity-70">
-        <iframe src="https://my.spline.design/genkubgreetingrobot-MW4W3iAFsJj5olFfT1MhN0TH/" frameBorder="0" width="100%" height="100%" loading="lazy" title="3D robot animation" className="w-full h-full" />
-      </div>
-
-      <div ref={orbRef1} className="absolute top-1/4 left-1/4 w-32 h-32 bg-primary/20 rounded-full blur-xl animate-pulse" />
-      <div ref={orbRef2} className="absolute top-1/3 right-1/3 w-24 h-24 bg-secondary/20 rounded-full blur-xl animate-pulse" style={{ animationDelay: '1s' }} />
-      <div ref={orbRef3} className="absolute bottom-1/4 left-1/3 w-40 h-40 bg-accent/20 rounded-full blur-xl animate-pulse" style={{ animationDelay: '2s' }} />
+      <div ref={orbRef1} className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/25 rounded-full blur-3xl animate-pulse" />
+      <div ref={orbRef2} className="absolute top-1/3 right-1/4 w-48 h-48 bg-secondary/25 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+      <div ref={orbRef3} className="absolute bottom-1/4 left-1/3 w-72 h-72 bg-accent/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+      <div className="absolute top-1/2 right-1/5 w-40 h-40 bg-primary/15 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '0.5s' }} />
 
       <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
         <h1 ref={titleRef} className="text-4xl md:text-6xl lg:text-7xl font-light text-foreground mb-6 leading-tight">

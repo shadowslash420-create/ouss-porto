@@ -6,44 +6,44 @@
 
 @layer base {
   :root {
-    --background: 222 47% 2%;
+    --background: 230 35% 4%;
     --foreground: 210 40% 98%;
     
-    --primary: 260 100% 65%;
+    --primary: 215 100% 60%;
     --primary-foreground: 210 40% 98%;
-    --primary-glow: 260 100% 75%;
+    --primary-glow: 215 100% 72%;
     
-    --secondary: 180 100% 50%;
-    --secondary-foreground: 222 47% 2%;
-    --secondary-glow: 180 100% 60%;
+    --secondary: 155 100% 48%;
+    --secondary-foreground: 230 35% 4%;
+    --secondary-glow: 155 100% 60%;
     
-    --accent: 300 100% 70%;
+    --accent: 330 100% 62%;
     --accent-foreground: 210 40% 98%;
-    --accent-glow: 300 100% 80%;
+    --accent-glow: 330 100% 74%;
     
-    --muted: 222 47% 8%;
-    --muted-foreground: 215 20% 65%;
-    --border: 222 47% 12%;
-    --input: 222 47% 6%;
-    --ring: 260 100% 65%;
+    --muted: 230 35% 9%;
+    --muted-foreground: 215 20% 68%;
+    --border: 230 35% 14%;
+    --input: 230 35% 7%;
+    --ring: 215 100% 60%;
     
-    --card: 222 47% 4%;
+    --card: 230 35% 6%;
     --card-foreground: 210 40% 98%;
-    --glass: 222 47% 8%;
+    --glass: 230 35% 9%;
     
     --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
     
     --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
     --gradient-secondary: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--primary)));
-    --gradient-background: linear-gradient(135deg, hsl(222 47% 2%), hsl(222 47% 3%));
-    --gradient-glass: linear-gradient(135deg, hsl(222 47% 8% / 0.1), hsl(222 47% 12% / 0.1));
+    --gradient-background: linear-gradient(145deg, hsl(230 35% 4%), hsl(240 30% 6%), hsl(230 35% 4%));
+    --gradient-glass: linear-gradient(135deg, hsl(230 35% 9% / 0.1), hsl(230 35% 14% / 0.1));
     
-    --shadow-neon: 0 0 20px hsl(var(--primary) / 0.3);
-    --shadow-cyan: 0 0 20px hsl(var(--secondary) / 0.3);
-    --shadow-glass: 0 8px 32px hsl(222 47% 2% / 0.37);
-    --glow-primary: 0 0 40px hsl(var(--primary) / 0.4);
-    --glow-secondary: 0 0 40px hsl(var(--secondary) / 0.4);
+    --shadow-neon: 0 0 25px hsl(var(--primary) / 0.5);
+    --shadow-cyan: 0 0 25px hsl(var(--secondary) / 0.5);
+    --shadow-glass: 0 8px 32px hsl(230 35% 4% / 0.37);
+    --glow-primary: 0 0 50px hsl(var(--primary) / 0.55);
+    --glow-secondary: 0 0 50px hsl(var(--secondary) / 0.55);
     
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
