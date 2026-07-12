@@ -78,50 +78,50 @@ const Navigation = () => {
 
   return (
     <>
-      <nav ref={navRef}className="fixed top-0 left-0 right-0 z-40 glass border-b border-white/10">
+      <nav ref={navRef} className="fixed top-0 left-0 right-0 z-40 bg-[#0F172A] border-b border-white/5 shadow-lg">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div ref={logoRef}>
-              <h2 className="text-2xl font-bold text-primary-glow cursor-pointer">
+              <h2 className="text-2xl font-bold text-white cursor-pointer">
                 Portfolio
               </h2>
             </div>
 
             <div ref={menuRef} className="hidden md:flex items-center space-x-8">
               {navItems.map((item) => (
-                <button key={item.id} onClick={() => scrollToSection(item.id)} className="text-foreground/80 hover:text-primary-glow transition-colors duration-300 font-light">
+                <button key={item.id} onClick={() => scrollToSection(item.id)} className="text-white/70 hover:text-white transition-colors duration-300 font-light">
                   {item.name}
                 </button>
               ))}
               
-              <button onClick={() => scrollToSection('contact')}className="px-6 py-2 bg-gradient-primary text-primary-foreground rounded-lg hover:shadow-glow-primary transition-all duration-300 hover:scale-105">
+              <button onClick={() => scrollToSection('contact')} className="px-6 py-2 bg-gradient-primary text-white rounded-lg hover:shadow-glow-primary transition-all duration-300 hover:scale-105">
                 Hire Me
               </button>
             </div>
 
-            <button onClick={() => setIsOpen(!isOpen)} className="md:hidden text-foreground p-2">
+            <button onClick={() => setIsOpen(!isOpen)} className="md:hidden text-white p-2">
               <List size={24} />
             </button>
           </div>
         </div>
       </nav>
 
-      <div ref={mobileMenuRef}className="fixed top-0 right-0 w-full h-full bg-background/95 backdrop-blur-lg z-50 transform translate-x-full md:hidden">
+      <div ref={mobileMenuRef} className="fixed top-0 right-0 w-full h-full bg-[#0F172A] z-50 transform translate-x-full md:hidden">
         <div className="flex items-center justify-between p-6 border-b border-white/10">
-          <h2 className="text-2xl font-light text-primary-glow">Portfolio</h2>
-          <button onClick={() => setIsOpen(false)} className="text-foreground p-2">
+          <h2 className="text-2xl font-light text-white">Portfolio</h2>
+          <button onClick={() => setIsOpen(false)} className="text-white/70 p-2">
             <X size={24} />
           </button>
         </div>
         
         <div className="flex flex-col space-y-6 p-6 mt-8">
           {navItems.map((item) => (
-            <button key={item.id} onClick={() => scrollToSection(item.id)} className="menu-item text-left text-xl text-foreground/80 hover:text-primary-glow transition-colors duration-300">
+            <button key={item.id} onClick={() => scrollToSection(item.id)} className="menu-item text-left text-xl text-white/70 hover:text-white transition-colors duration-300">
               {item.name}
             </button>
           ))}
           
-          <button onClick={() => scrollToSection('contact')}className="menu-item px-6 py-3 bg-gradient-primary text-primary-foreground rounded-lg hover:shadow-glow-primary transition-all duration-300 text-center mt-8">
+          <button onClick={() => scrollToSection('contact')} className="menu-item px-6 py-3 bg-gradient-primary text-white rounded-lg hover:shadow-glow-primary transition-all duration-300 text-center mt-8">
             Hire Me
           </button>
         </div>
