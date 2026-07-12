@@ -13,11 +13,11 @@ const Projects = () => {
   const projects = [
     {
       id: 1,
-      title: "Bike-time – Immersive Experience",
-      description: "Developed an interactive biking experience website featuring dynamic animations, route exploration, performance stats, and a sleek responsive interface for riders and enthusiasts.",
+      title: "Golden Rose Bakes – Bakery & Sweets Shop",
+      description: "An elegant bakery storefront for a wedding sweets and pastry shop, featuring a romantic rose-gold aesthetic, an Arabic-friendly layout showcasing wedding sweets, dry pastries, and occasion desserts, built to attract and convert local customers.",
       image: "/Images/project-1.jpg",
-      tech: ["React", "Node.js", "Framer Motion", "Express.js", "PostgreSQL", "Tailwind CSS", "Docker"],
-      liveUrl: "",
+      tech: ["React", "Tailwind CSS", "Vite"],
+      liveUrl: "https://golden-rose-portfolio--oussamaanis2005.replit.app/",
       githubUrl: ""
     },
 
