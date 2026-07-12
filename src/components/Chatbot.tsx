@@ -66,13 +66,13 @@ const Chatbot: React.FC = () => {
       let reply = "Sorry, I didn't understand that. Can you rephrase it?";
 
       if (userInput.includes("services")) {
-        reply = "CodeZenith offers services in frontend, backend development, animations, and AI integration. Would you like a portfolio link?";
+        reply = "Oussama offers services in frontend, backend development, animations, and AI integration. Would you like a portfolio link?";
       } else if (userInput.includes("contact")) {
-        reply = "You can contact CodeZenith via the contact form above or email him directly at codezenithhq@gmail.com";
+        reply = "You can contact Oussama via the contact form above or email him directly at oussamaanis2005@gmail.com";
       } else if (userInput.includes("react") || userInput.includes("gsap")) {
-        reply = "Yes! CodeZenith uses React, GSAP, and even WebGL to build stunning UIs.";
+        reply = "Yes! Oussama uses React, GSAP, and even WebGL to build stunning UIs.";
       } else if (userInput.includes("project")) {
-        reply = "Tell me more about your project! CodeZenith can help with frontend, backend, UI/UX design, and building full-stack web applications.";
+        reply = "Tell me more about your project! Oussama can help with frontend, backend, UI/UX design, and building full-stack web applications.";
       }
 
       const botResponse = {

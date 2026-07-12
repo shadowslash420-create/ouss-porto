@@ -106,11 +106,11 @@ const Footer = () => {
             <div className="space-y-3">
               <p className="text-muted-foreground">
                 <span className="text-primary-glow">Email:</span><br />
-                codezenithhq@gmail.com
+                oussamaanis2005@gmail.com
               </p>
               <p className="text-muted-foreground">
                 <span className="text-primary-glow">Location:</span><br />
-                New York City, New York
+                Batna, Algeria
               </p>
             </div>
           </div>
@@ -118,7 +118,7 @@ const Footer = () => {
 
         <div className="border-t border-border/30 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-muted-foreground text-center md:text-left">
-            © 2025 CodeZenith. All rights reserved.
+            © 2025 Oussama. All rights reserved.
           </p>
 
           {/* <div className="flex items-center gap-2 text-muted-foreground">

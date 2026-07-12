@@ -93,8 +93,8 @@ const Hero = () => {
 
   const downloadCV = () => {
     const link = document.createElement('a');
-    link.href = '/Images/CodeZenith-Resume.pdf';
-    link.download = 'CodeZenith-Resume.pdf';
+    link.href = '/Images/Oussama-Resume.pdf';
+    link.download = 'Oussama-Resume.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -114,7 +114,7 @@ const Hero = () => {
         <h1 ref={titleRef} className="text-4xl md:text-6xl lg:text-7xl font-light text-foreground mb-6 leading-tight">
           Hi, I'm{' '}
           <span className="text-glow bg-gradient-primary bg-clip-text text-transparent">
-            CodeZenith
+            Oussama
           </span>
           {' '}–{' '}
           <br className="hidden md:block" />
