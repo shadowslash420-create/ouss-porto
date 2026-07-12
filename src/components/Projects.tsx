@@ -98,18 +98,12 @@ const Projects = () => {
       {/* Project detail cards below gallery */}
       <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-3 gap-6 px-6 max-w-7xl mx-auto mt-10">
         {projects.map((project) => (
-          <div
+          <a
             key={project.id}
-            role="link"
-            tabIndex={0}
-            onClick={() => window.open(project.liveUrl, '_blank', 'noopener,noreferrer')}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                window.open(project.liveUrl, '_blank', 'noopener,noreferrer');
-              }
-            }}
-            className="glass rounded-xl p-6 flex flex-col gap-3 hover:shadow-neon transition-all duration-300 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            href={project.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group glass rounded-xl p-6 flex flex-col gap-3 hover:shadow-neon transition-all duration-300 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             <h3 className="text-lg font-semibold text-foreground">{project.title}</h3>
             <p className="text-sm text-muted-foreground leading-relaxed flex-1">{project.description}</p>
@@ -127,18 +121,12 @@ const Projects = () => {
               ))}
             </div>
 
-            <a
-              href={project.liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
-              className="inline-flex items-center gap-1.5 text-sm text-primary font-medium hover:gap-2.5 transition-all duration-200 mt-1"
-            >
+            <span className="inline-flex items-center gap-1.5 text-sm text-primary font-medium group-hover:gap-2.5 transition-all duration-200 mt-1">
               <Globe size={14} />
               View Live Site
               <ArrowUpRight size={14} />
-            </a>
-          </div>
+            </span>
+          </a>
         ))}
       </div>
 
