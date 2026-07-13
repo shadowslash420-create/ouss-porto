@@ -72,7 +72,7 @@ const Navigation = ({ ready = true }: NavigationProps) => {
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className="text-sm text-foreground/60 hover:text-foreground transition-colors duration-200 font-medium tracking-wide"
+                  className="text-sm text-foreground/60 hover:text-foreground transition-colors duration-200 font-medium tracking-wide font-mono"
                 >
                   {item.name}
                 </button>
@@ -112,7 +112,7 @@ const Navigation = ({ ready = true }: NavigationProps) => {
               </a>
               <button
                 onClick={() => scrollToSection('contact')}
-                className="ml-2 px-5 py-1.5 bg-gradient-primary text-white text-sm rounded-lg hover:shadow-glow-primary transition-all duration-300 hover:scale-105 font-medium"
+                className="ml-2 px-5 py-1.5 bg-gradient-primary text-white text-sm rounded-lg hover:shadow-glow-primary transition-all duration-300 hover:scale-105 font-medium font-mono"
               >
                 Hire Me
               </button>
