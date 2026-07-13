@@ -132,7 +132,7 @@ const Projects = () => {
 
             <div className="flex flex-wrap gap-2">
               {project.tech.map((t) => (
-                <span key={t} className="px-2.5 py-1 bg-primary/8 text-primary text-xs rounded-full border border-primary/15 font-medium">
+                <span key={t} className="px-2.5 py-1 bg-primary/8 text-primary text-xs rounded-full border border-primary/15 font-medium font-mono">
                   {t}
                 </span>
               ))}
@@ -179,7 +179,7 @@ const Projects = () => {
 
               <div className="flex flex-wrap gap-2">
                 {selectedProject.tech.map((t) => (
-                  <span key={t} className="px-2.5 py-1 bg-primary/8 text-primary text-xs rounded-full border border-primary/15 font-medium">
+                  <span key={t} className="px-2.5 py-1 bg-primary/8 text-primary text-xs rounded-full border border-primary/15 font-medium font-mono">
                     {t}
                   </span>
                 ))}
