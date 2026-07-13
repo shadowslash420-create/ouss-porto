@@ -158,63 +158,78 @@ const Chatbot: React.FC = () => {
   return (
     <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50">
       {isOpen && (
-        <div ref={chatboxRef} className="mb-4 w-[calc(100vw-3rem)] max-w-80 h-[70vh] max-h-96 glass-card overflow-hidden flex flex-col bg-black border border-gray-200">
-          <div className="p-4 border-b border-glass-border ">
+        <div ref={chatboxRef} className="mb-4 w-[calc(100vw-3rem)] max-w-80 h-[70vh] max-h-96 glass overflow-hidden flex flex-col rounded-2xl border border-border shadow-glass">
+          {/* Header */}
+          <div className="p-4 border-b border-border bg-background/60">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
-                <div className="p-2 bg-gradient-primary rounded-full">
-                  <Robot size={20} className="text-foreground" />
+                <div className="p-2 bg-gradient-primary rounded-full shadow-glow-primary">
+                  <Robot size={20} className="text-white" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-sm">AI Assistant</h3>
+                  <h3 className="font-semibold text-sm text-foreground">AI Assistant</h3>
                   <p className="text-xs text-muted-foreground">Online</p>
                 </div>
               </div>
-              <button onClick={toggleChat} className="p-1 hover:bg-muted/20 rounded-full transition-colors">
+              <button onClick={toggleChat} className="p-1.5 hover:bg-muted rounded-full transition-colors text-muted-foreground hover:text-foreground">
                 <X size={16} />
               </button>
             </div>
           </div>
 
-          <div className="flex-1 overflow-y-auto p-4 space-y-4">
+          {/* Messages */}
+          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-background/40">
             {messages.map((msg) => (
               <div key={msg.id} className={`flex ${msg.isBot ? 'justify-start' : 'justify-end'}`}>
                 <div
-                  className={`max-w-xs px-3 py-2 rounded-lg text-sm ${msg.isBot
-                    ? 'bg-muted/20 text-foreground'
-                    : 'bg-gradient-primary text-foreground'
-                    }`}>
+                  className={`max-w-xs px-3 py-2 rounded-xl text-sm leading-relaxed ${msg.isBot
+                    ? 'bg-muted text-foreground border border-border'
+                    : 'bg-gradient-primary text-white shadow-glow-primary'
+                  }`}>
                   {msg.text}
                 </div>
               </div>
             ))}
             {isTyping && (
               <div className="flex justify-start">
-                <div className="max-w-xs px-3 py-2 rounded-lg text-sm bg-muted/20 text-foreground flex items-center gap-1">
-                  <span className="w-1.5 h-1.5 bg-foreground/60 rounded-full animate-bounce [animation-delay:-0.3s]" />
-                  <span className="w-1.5 h-1.5 bg-foreground/60 rounded-full animate-bounce [animation-delay:-0.15s]" />
-                  <span className="w-1.5 h-1.5 bg-foreground/60 rounded-full animate-bounce" />
+                <div className="max-w-xs px-3 py-2 rounded-xl text-sm bg-muted border border-border text-foreground flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 bg-primary rounded-full animate-bounce [animation-delay:-0.3s]" />
+                  <span className="w-1.5 h-1.5 bg-primary rounded-full animate-bounce [animation-delay:-0.15s]" />
+                  <span className="w-1.5 h-1.5 bg-primary rounded-full animate-bounce" />
                 </div>
               </div>
             )}
           </div>
 
-          <div className="p-4 border-t border-glass-border">
+          {/* Input */}
+          <div className="p-4 border-t border-border bg-background/60">
             <div className="flex space-x-2">
-              <input type="text" value={message} onChange={(e) => setMessage(e.target.value)} onKeyPress={handleKeyPress} placeholder="Type a message..." disabled={isTyping} className="flex-1 px-3 py-2 bg-glass border border-glass-border rounded-lg text-sm focus:outline-none focus:border-primary disabled:opacity-60" />
-              <button onClick={handleSendMessage} disabled={isTyping} className="p-2 w-8 h-8 bg-gradient-primary rounded-lg hover:scale-105 transition-transform disabled:opacity-60 disabled:hover:scale-100">
-                <PaperPlaneTilt size={16} />
+              <input
+                type="text"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                onKeyPress={handleKeyPress}
+                placeholder="Type a message..."
+                disabled={isTyping}
+                className="flex-1 px-3 py-2 bg-background border border-border rounded-xl text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-colors disabled:opacity-60"
+              />
+              <button
+                onClick={handleSendMessage}
+                disabled={isTyping}
+                className="p-2 w-9 h-9 bg-gradient-primary rounded-xl hover:shadow-glow-primary hover:scale-105 transition-all disabled:opacity-60 disabled:hover:scale-100 disabled:hover:shadow-none flex items-center justify-center"
+              >
+                <PaperPlaneTilt size={16} className="text-white" />
               </button>
             </div>
           </div>
         </div>
       )}
 
-      <button ref={buttonRef} onClick={toggleChat} className="chatbot w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center shadow-glow-primary hover:scale-110 transition-transform">
+      <button ref={buttonRef} onClick={toggleChat} className="chatbot w-14 h-14 bg-gradient-primary rounded-full flex items-center justify-center shadow-glow-primary hover:scale-110 hover:shadow-[0_8px_40px_hsl(var(--primary)/0.45)] transition-all duration-300">
         {isOpen ? (
-          <X size={24} className="text-foreground" />
+          <X size={22} className="text-white" />
         ) : (
-          <ChatCircle size={24} className="text-foreground" />
+          <ChatCircle size={22} className="text-white" />
         )}
       </button>
     </div>
